@@ -27,29 +27,29 @@ function ddMmYyyy()
 	echo $date;
 }
 
-function stringInputResults($inString)
+function stringInput($inString)
 {
-		$charNum = strlen($inString);
-		$strTrim = trim($inString);
-		$lowerStr = strtolower($strTrim);
-		$trimmedCharNum = strlen($strTrim);
+	$characterNumber = strlen($inString);
+	$stringTrim = trim($inString);
+	$lowercaseString = strtolower($stringTrim);
+	$trimmedCharacterNumber = strlen($stringTrim);
+	
+	echo("Character Count: <strong>$characterNumber</strong><br/>
+	Untrimmed, Regular Case String:<strong>$inString</strong><br/>
+	Trimmed, Lowercase String: <strong>$lowercaseString</strong><br/>
+	Trimmed Character Count:<strong>$trimmedCharacterNumber</strong><br/>");
 		
-		echo("<strong>Character Count:</strong> $charNum<br/>
-		<strong>Untrimmed, Regular Case String: </strong>$inString<br/>
-		<strong>Trimmed, Lowercase String:</strong> $lowerStr<br/>
-		<strong>Trimmed Character Count:</strong>$trimmedCharNum<br/>");
-		
-		if(strpos($lowerStr, 'dmacc') !== false)
+		if(strpos($lowercaseString, 'dmacc') !== false)
 		{
-		echo("Contains DMACC.");
+		echo("<strong>Contains DMACC.</strong>");
 		}
 		else
 		{
-		echo("Does not contain DMACC.");
+		echo("<strong>Does not contain DMACC.</strong>");
 		}
 }
 
-function formatNum($inNum)
+function formatNumber($inNum)
 {
 	echo(number_format($inNum));
 }
@@ -72,10 +72,10 @@ function formatMoney($inNum)
 
 <h2>3</h2>
 <h3>String Results</h3>
-<p><?php stringInputResults("Woohoo! We're doing PHP at DMACC!"); ?></p>
+<p><?php stringInput("Woohoo! We're doing PHP at DMACC!"); ?></p>
 
 <h2>4</h2><h3>Formatted Number</h3>
-<p><?php formatNum(1234567890); ?></p>
+<p><?php formatNumber(1234567890); ?></p>
 <h2>5</h2>
 <h3>Formatted Money</h3><p><?php formatMoney(123456); ?></p>
 </body>
