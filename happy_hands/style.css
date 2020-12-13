@@ -1,0 +1,53 @@
+.footer2{
+            display: flex;
+            justify-content: center;
+            align-self: flex-end;
+            font-family:'Luckiest Guy', cursive;
+            font-size: 25px;
+}
+p{
+    letter-spacing: 1.5px;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 15px;
+    line-height: 30px;
+}
+h1{
+    font-family:'Luckiest Guy', cursive;
+    font-size: 60px;
+    margin-left: 15px;
+        }
+
+ul{
+    letter-spacing: 1.5px;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 15px;
+    line-height: 30px;
+}
+a{
+    text-decoration: none;
+    background-color: transparent;
+}
+.top{
+    text-align: center;
+}
+a:hover
+{
+     text-decoration:none;
+}
+.header{
+    text-align: center;
+    margin-top: 50px;
+}
+.content {
+  padding: 16px;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.sticky + .content {
+  padding-top: 60px;
+}
