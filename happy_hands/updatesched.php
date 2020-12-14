@@ -214,7 +214,7 @@ body {
           </fieldset>
          	<p>
             	<input type="submit" name="submit" id="submit" value="Update"/>
-            	<a href="schedule.php"><button type='button'>Cancel</button></a>
+            	<a href="displaysched.php"><button type='button'>Cancel</button></a>
         	</p>  
       </form>
         <?php
