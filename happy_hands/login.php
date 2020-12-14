@@ -187,6 +187,7 @@ else
 <p>Username: <input type="text" name="loginUser" /></p>
 <p>Password: <input type="password" name="loginPass" /></p>
 <p><input type="submit" name ="submit" value="Login"></p>
+<a href="index.html">Back to Main Site</a>
 </form>
 </div></div>
 <?php
