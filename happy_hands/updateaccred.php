@@ -7,27 +7,27 @@ if (!$_SESSION['validUser']) {
 
 $updateRecID = $_GET['recId'];
 
-$instructor_name = "";
-$instructor_spec = "";
-$instructor_about = "";
+$organization = "";
+$yearaccred = "";
+$level = "";
 $valid_form = false;
 
 if (isset($_POST["submit"]))  {
-	$instructor_name = $_POST["instructor_name"];
-	$instructor_spec = $_POST["instructor_spec"];
-	$instructor_about = $_POST["instructor_about"];
+	$organization = $_POST["organization"];
+	$yearaccred = $_POST["yearaccred"];
+	$level = $_POST["level"];
 
 
 	//Begin data validation!!!! 
 	
-    if ($instructor_name == "") 	
-        $error_message .= " Please enter event name";
+    if ($organization == "") 	
+        $error_message .= " Please enter organization name";
 
-    if ($instructor_spec == "") 
-        $error_message .= " Please enter event Specialty";
+    if ($yearaccred == "") 
+        $error_message .= " Please enter year of accredidation";
 
-    if ($instructor_about == "") 
-        $error_message .= " Please enter event About";
+    if ($level == "") 
+        $error_message .= " Please enter level of accredidation";
 
 	if ($error_message == "")
 		$valid_form = true;
@@ -35,11 +35,11 @@ if (isset($_POST["submit"]))  {
 	if ($valid_form) {	//process the update
 		try {
 			require 'dbConnect.php';
-			$sql = "UPDATE instructors SET ";
-			$sql .= "instructor_name='$instructor_name',";
-			$sql .= "instructor_spec='$instructor_spec',";
-			$sql .= "instructor_about='$instructor_about',";
-			$sql .= "WHERE instructor_id='$updateRecID'";
+			$sql = "UPDATE accreds SET ";
+			$sql .= "organization='$organization',";
+			$sql .= "yearaccred='$yearaccred',";
+			$sql .= "level='$level',";
+			$sql .= "WHERE accred_id='$updateRecID'";
 			
 			//PREPARE the SQL statement
 			$stmt = $conn->prepare($sql);
@@ -47,7 +47,7 @@ if (isset($_POST["submit"]))  {
 			//EXECUTE the prepared statement
 			$stmt->execute();	
 				
-			$message = "Instructor has been Updated.";
+			$message = "Accredidation has been Updated.";
 		}
 		catch(PDOException $e) {
 			$message = "There has been a problem. The system administrator has been contacted. Please try again later.";
@@ -67,7 +67,7 @@ else {		// not updated yet
 	try {
 		require 'dbConnect.php';
 
-		$sql = "SELECT instructor_name, instructor_spec, instructor_about FROM instructors WHERE instructor_id=$updateRecID";
+		$sql = "SELECT organization, yearaccred, level FROM accreds WHERE accred_id=$updateRecID";
 		 //PREPARE the SQL statement
 		 $stmt = $conn->prepare($sql);
 		  
@@ -79,9 +79,9 @@ else {		// not updated yet
 		 
 		 $row=$stmt->fetch(PDO::FETCH_ASSOC);	 
 			   
-		 $instructor_name=$row['instructor_name'];
-		 $instructor_spec=$row['instructor_spec'];
-		 $instructor_about=$row['instructor_about'];		
+		 $organization=$row['organization'];
+		 $yearaccred=$row['yearaccred'];
+		 $level=$row['level'];		
 
 	 }
 	 catch(PDOException $e) {
@@ -118,8 +118,8 @@ else {		// not updated yet
     <!-- Sylwia Glod, 11-28-2019 -->  
 <style>
 body{
-            background-color: #d0b4a0;
-        } 
+            background-color: #A0DAA9;
+        }  
 
 		form {
       border: 2px solid black;
@@ -140,8 +140,8 @@ body{
 </head>
 
 <body>
-<h1 class="header">Happy Hands Daycare Instructor Section</h1>
-			<h2 class="logindesc">Please update Instructor below</h2>
+<h1 class="header">Happy Hands Daycare Accredidation Section</h1>
+			<h2 class="logindesc">Please update Accredidation below</h2>
             <img src="images/gautam-arora-78Ae6N7rNvI-unsplash.jpg" title="empty classroom" alt="empty classroom" class="img-fluid">
             </div>
         </header>
@@ -162,7 +162,7 @@ body{
         <a class="nav-link" href="accreditations.php">Accreditations</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="schedule.php">Schedule</a>
+        <a class="nav-link" href="displaysched.php">Schedule</a>
       </li>
     </ul>
     <ul class="navbar-nav ml-auto nav-flex-icons">
@@ -192,29 +192,29 @@ body{
 			else	//display form
 			{
         ?>
-        <form id="updateinstructor" name="updateinstructor" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . "?id=$updateID"; ?>">
+        <form id="updateaccred" name="updateaccred" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . "?id=$updateID"; ?>">
         	<fieldset>
-              <legend>Update Instructor</legend>
+              <legend>Update Accredidation</legend>
               <p>
-                <label for="instructor_name">Instructor Name: </label>
-                <input type="text" name="instructor_name" id="instructor_name" value="<?php echo $instructor_name;  ?>" /> 
+                <label for="organization">Organization Name: </label>
+                <input type="text" name="organization" id="organization" value="<?php echo $organization;  ?>" /> 
                 <span class="errMsg"> <?php echo $error_message; ?></span>
               </p>
               <p>
-                <label for="instructor_spec">Instructor Speciality:</label>
-				<input type="text" name="instructor_spec" id="instructor_spec" value="<?php echo $instructor_spec;  ?>" />
+                <label for="yearaccred">Year of accredidation:</label>
+				<input type="text" name="yearaccred" id="yearaccred" value="<?php echo $yearaccred;  ?>" />
                 <span class="errMsg"><?php echo $error_message; ?></span>                
               </p>
               <p>
-                <label for="instructor_about">Instructor About: </label>
-				<textarea name="instructor_about" id="instructor_about" maxlength="700"rows="4" cols="50"><?php echo $instructor_about; ?></textarea>
+                <label for="level">Level of accredidation: </label>
+                <input type="text" name="level" id="level" value="<?php echo $level;  ?>" />
                 <span class="errMsg"><?php echo $error_message; ?></span>                      
               </p>
               
           </fieldset>
          	<p>
             	<input type="submit" name="submit" id="submit" value="Update"/>
-            	<a href="login.php"><button type='button'>Cancel</button></a>
+            	<a href="accreditations.php"><button type='button'>Cancel</button></a>
         	</p>  
       </form>
         <?php

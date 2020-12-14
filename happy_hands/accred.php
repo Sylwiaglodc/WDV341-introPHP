@@ -252,13 +252,13 @@ footer{
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="accred.html">Accreditation</a>
+        <a class="nav-link" href="accred.php">Accreditation</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="sched.html">Schedule</a>
+        <a class="nav-link" href="sched.php">Schedule</a>
       </li>
         <li class="nav-item">
-        <a class="nav-link" href="contact.html">Contact Us</a>
+        <a class="nav-link" href="contact.php">Contact Us</a>
       </li>
     </ul>
     <ul class="navbar-nav ml-auto nav-flex-icons">

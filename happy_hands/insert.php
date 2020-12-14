@@ -171,9 +171,9 @@ if(isset($_POST["submitForm"]))
         color:white;
     }
 
-    body {
-		background-color: #98B4D4;
-    }
+    body{
+            background-color: #d0b4a0;
+        }  
     .logindesc{
 	font-family:"Lucida Console", Monaco, monospace	;
 	font-size:20px;

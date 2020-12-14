@@ -208,18 +208,18 @@ catch(PDOEXCEPTION $e)
   <div class="collapse navbar-collapse" id="navbarSupportedContent-555">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="about.html">About Us
+        <a class="nav-link" href="about.php">About Us
           <span class="sr-only">(current)</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="accred.html">Accreditation</a>
+        <a class="nav-link" href="accred.php">Accreditation</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="sched.html">Schedule</a>
+        <a class="nav-link" href="sched.php">Schedule</a>
       </li>
         <li class="nav-item">
-        <a class="nav-link" href="contact.html">Contact Us</a>
+        <a class="nav-link" href="contact.php">Contact Us</a>
       </li>
     </ul>
     <ul class="navbar-nav ml-auto nav-flex-icons">

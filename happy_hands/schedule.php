@@ -107,7 +107,7 @@ if(isset($_POST["submitForm"]))
 				error_log($e->getMessage()); //Delivers a developer defined error message to the PHP log file at c:\mampp/php\logs\php_error_log
 				error_log(var_dump(debug_backtrace()));
 			    //Clean up any variables or connections that have been left hanging by this error.
-				//header('Location: files/505_error_response_page.php');	//sends control to a User friendly page
+				
 			}
 
 		}
@@ -146,6 +146,10 @@ if(isset($_POST["submitForm"]))
     <meta name="keywords" content=" Daycare, Child Care">
     <!-- Sylwia Glod, 11-28-2019 -->
     <style>
+
+    .navbar{
+      background-color:#001933;
+    }
 
     .error {
       color: red;

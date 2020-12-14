@@ -1,5 +1,4 @@
 <?php
-
 try{
     require "dbConnect.php";
     $sql= "SELECT instructor_id, instructor_name, instructor_img, instructor_spec, instructor_about FROM instructors ";
@@ -43,11 +42,9 @@ catch(PDOEXCEPTION $e)
     
     <style>
         a{
-            color: brown;
+            color: white;
         }
-        a:hover{
-            color: brown;
-        }
+
         footer{
             background-color: saddlebrown;
         }
@@ -148,6 +145,12 @@ catch(PDOEXCEPTION $e)
   text-align:center;
 }
 
+.link{
+  border-style:solid;
+  padding:10px;
+  margin:20px;
+}
+
 @media screen and (max-width: 700px){
   .box{
     width: 90%;
@@ -176,19 +179,21 @@ catch(PDOEXCEPTION $e)
     .pre{
         font-size: 45px;
     }
+   
 }
  
 @media all and (max-width: 959px) and (min-width: 600px) {
     .pre{
         font-size: 30px;
     }
+   
 }
  
 @media all and (max-width: 599px) and (min-width: 320px) {
     .pre{
         font-size: 25px;
     }
- 
+    
 }
     </style>
   
@@ -244,16 +249,19 @@ catch(PDOEXCEPTION $e)
             while( $row=$stmt->fetch(PDO::FETCH_ASSOC)){
     ?> 
     
-  <div class="accredmain">
+  <div class="accredmain" style="overflow-x:auto;">
         <div class="grid">
                     <span class="accredorgan"><strong>Instructor Name:</strong> <p><?php echo $row['instructor_name'];?></p></span><br>
                     <span class="accredyear"><strong>Instuctor Speciality: </strong> <p><?php echo $row['instructor_spec'];?></span></p><br>
                     <span class="level"><strong> Instructor About: </strong><br><p><?php echo $row['instructor_about'];?></p></span>
                     <br>
                     
-                    <?php $instr_id=$row['instructor_id'];?>
-                    <a href="update.php?recId=<?php echo $instr_id;?>" > Update exsisting Instructor</a><br>
-                    <a href="delete.php?redId=<?php echo $instr_id;?>"> Delete exsisting Instructor</a>
+                   <div class=link>
+                    <a href="update.php?recId=<?php echo $row['instructor_id'];?>" > Update exsisting Instructor</a><br>
+                    </div>
+                    <div class=link>
+                    <a href="deleteinstructor.php?recId=<?php echo $row['instructor_id'];?>" >  Delete exsisting Instructor</a>
+                    </div>
             </div>
             </div>
          <?php
@@ -268,7 +276,7 @@ catch(PDOEXCEPTION $e)
             <a style="background-color:black;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px" href="https://unsplash.com/@element5digital?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge" target="_blank" rel="noopener noreferrer" title="Download free do whatever you want high-resolution photos from Element5 Digital"><span style="display:inline-block;padding:2px 3px"><svg xmlns="http://www.w3.org/2000/svg" style="height:12px;width:auto;position:relative;vertical-align:middle;top:-2px;fill:white" viewBox="0 0 32 32"><title>unsplash-logo</title><path d="M10 9V0h12v9H10zm12 5h10v18H0V14h10v9h12v-9z"></path></svg></span><span style="display:inline-block;padding:2px 3px">Element5 Digital</span></a>
 </footer>  
            
-        <script src="http://code.jquery.com/jquery-latest.min.js"></script> <script src="js/bootstrap.min.js"></script> <script> $(function(){ $('.nav-tabs a:first').tab('show'); }); </script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script> <script src="js/bootstrap.min.js"></script> 
             
     </body>
 </html>          

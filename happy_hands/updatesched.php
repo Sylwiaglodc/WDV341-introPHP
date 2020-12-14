@@ -7,27 +7,27 @@ if (!$_SESSION['validUser']) {
 
 $updateRecID = $_GET['recId'];
 
-$instructor_name = "";
-$instructor_spec = "";
-$instructor_about = "";
+$schedule_time = "";
+$schedule_name = "";
+$schedule_desc = "";
 $valid_form = false;
 
 if (isset($_POST["submit"]))  {
-	$instructor_name = $_POST["instructor_name"];
-	$instructor_spec = $_POST["instructor_spec"];
-	$instructor_about = $_POST["instructor_about"];
+	$schedule_time = $_POST["schedule_time"];
+	$schedule_name = $_POST["schedule_name"];
+	$schedule_desc = $_POST["schedule_desc"];
 
 
 	//Begin data validation!!!! 
 	
-    if ($instructor_name == "") 	
-        $error_message .= " Please enter event name";
+    if ($schedule_time == "") 	
+        $error_message .= " Please enter schedule time";
 
-    if ($instructor_spec == "") 
-        $error_message .= " Please enter event Specialty";
+    if ($schedule_name== "") 
+        $error_message .= " Please enter schedule name";
 
-    if ($instructor_about == "") 
-        $error_message .= " Please enter event About";
+    if ($schedule_desc == "") 
+        $error_message .= " Please enter schedule description";
 
 	if ($error_message == "")
 		$valid_form = true;
@@ -35,11 +35,11 @@ if (isset($_POST["submit"]))  {
 	if ($valid_form) {	//process the update
 		try {
 			require 'dbConnect.php';
-			$sql = "UPDATE instructors SET ";
-			$sql .= "instructor_name='$instructor_name',";
-			$sql .= "instructor_spec='$instructor_spec',";
-			$sql .= "instructor_about='$instructor_about',";
-			$sql .= "WHERE instructor_id='$updateRecID'";
+			$sql = "UPDATE schedule SET ";
+			$sql .= "schedule_time='$schedule_time',";
+			$sql .= "schedule_name='$schedule_name',";
+			$sql .= "schedule_desc='$schedule_desc',";
+			$sql .= "WHERE schedule_id='$updateRecID'";
 			
 			//PREPARE the SQL statement
 			$stmt = $conn->prepare($sql);
@@ -47,7 +47,7 @@ if (isset($_POST["submit"]))  {
 			//EXECUTE the prepared statement
 			$stmt->execute();	
 				
-			$message = "Instructor has been Updated.";
+			$message = "Schedule has been Updated.";
 		}
 		catch(PDOException $e) {
 			$message = "There has been a problem. The system administrator has been contacted. Please try again later.";
@@ -67,7 +67,7 @@ else {		// not updated yet
 	try {
 		require 'dbConnect.php';
 
-		$sql = "SELECT instructor_name, instructor_spec, instructor_about FROM instructors WHERE instructor_id=$updateRecID";
+		$sql = "SELECT schedule_time, schedule_name, schedule_desc FROM schedule WHERE schedule_id=$updateRecID";
 		 //PREPARE the SQL statement
 		 $stmt = $conn->prepare($sql);
 		  
@@ -79,9 +79,9 @@ else {		// not updated yet
 		 
 		 $row=$stmt->fetch(PDO::FETCH_ASSOC);	 
 			   
-		 $instructor_name=$row['instructor_name'];
-		 $instructor_spec=$row['instructor_spec'];
-		 $instructor_about=$row['instructor_about'];		
+		 $schedule_time=$row['schedule_time'];
+		 $schedule_name=$row['schedule_name'];
+		 $schedule_desc=$row['schedule_desc'];		
 
 	 }
 	 catch(PDOException $e) {
@@ -117,9 +117,9 @@ else {		// not updated yet
     <title>Happy Hands Daycare</title>
     <!-- Sylwia Glod, 11-28-2019 -->  
 <style>
-body{
-            background-color: #d0b4a0;
-        } 
+body {
+		background-color: #98B4D4;
+    } 
 
 		form {
       border: 2px solid black;
@@ -140,8 +140,8 @@ body{
 </head>
 
 <body>
-<h1 class="header">Happy Hands Daycare Instructor Section</h1>
-			<h2 class="logindesc">Please update Instructor below</h2>
+<h1 class="header">Happy Hands Daycare Schedule Section</h1>
+			<h2 class="logindesc">Please update Schedule below</h2>
             <img src="images/gautam-arora-78Ae6N7rNvI-unsplash.jpg" title="empty classroom" alt="empty classroom" class="img-fluid">
             </div>
         </header>
@@ -192,29 +192,29 @@ body{
 			else	//display form
 			{
         ?>
-        <form id="updateinstructor" name="updateinstructor" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . "?id=$updateID"; ?>">
+        <form id="updatesched" name="updatesched" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . "?id=$updateID"; ?>">
         	<fieldset>
-              <legend>Update Instructor</legend>
+              <legend>Update Schedule</legend>
               <p>
-                <label for="instructor_name">Instructor Name: </label>
-                <input type="text" name="instructor_name" id="instructor_name" value="<?php echo $instructor_name;  ?>" /> 
+                <label for="schedule_time">Schedule Time: </label>
+                <input type="text" name="schedule_time" id="schedule_time" value="<?php echo $schedule_time;  ?>" /> 
                 <span class="errMsg"> <?php echo $error_message; ?></span>
               </p>
               <p>
-                <label for="instructor_spec">Instructor Speciality:</label>
-				<input type="text" name="instructor_spec" id="instructor_spec" value="<?php echo $instructor_spec;  ?>" />
+                <label for="schedule_name">Schedule Name:</label>
+				<input type="text" name="schedule_name" id="schedule_name" value="<?php echo $schedule_name;  ?>" />
                 <span class="errMsg"><?php echo $error_message; ?></span>                
               </p>
               <p>
-                <label for="instructor_about">Instructor About: </label>
-				<textarea name="instructor_about" id="instructor_about" maxlength="700"rows="4" cols="50"><?php echo $instructor_about; ?></textarea>
+                <label for="schedule_desc">Schedule Description: </label>
+                <textarea name="schedule_desc" id="schedule_desc" maxlength="700"rows="4" cols="50"><?php echo $schedule_desc; ?></textarea>
                 <span class="errMsg"><?php echo $error_message; ?></span>                      
               </p>
               
           </fieldset>
          	<p>
             	<input type="submit" name="submit" id="submit" value="Update"/>
-            	<a href="login.php"><button type='button'>Cancel</button></a>
+            	<a href="schedule.php"><button type='button'>Cancel</button></a>
         	</p>  
       </form>
         <?php

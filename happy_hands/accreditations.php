@@ -1,7 +1,7 @@
 <?php
 try{
     require "dbConnect.php";
-    $sql= "SELECT organization, yearaccred, level FROM accreds ";
+    $sql= "SELECT accred_id, organization, yearaccred, level FROM accreds ";
 
     $stmt = $conn->prepare($sql);
 
@@ -41,7 +41,9 @@ catch(PDOEXCEPTION $e)
     <!-- Sylwia Glod, 11-28-2019 -->
     
     <style>
-
+a{
+  color:white;
+}
         footer{
             background-color:#00A170;
         }
@@ -57,6 +59,11 @@ catch(PDOEXCEPTION $e)
     .navbar{
     background-color: #00A170;  
 }    
+.link{
+  border-style:solid;
+  padding:10px;
+  margin:20px;
+}
         
        
 .accredmain{
@@ -162,12 +169,18 @@ catch(PDOEXCEPTION $e)
             while( $row=$stmt->fetch(PDO::FETCH_ASSOC)){
     ?> 
     
-  <div class="accredmain">
+  <div class="accredmain" style="overflow-x:auto;">
         <div class="grid">
                     <span class="accredorgan"><strong>Organization Name: </strong> <p><?php echo $row['organization'];?></p></span><br>
                     <span class="accredyear"><strong>Year of Accreditation: </strong> <p><?php echo $row['yearaccred'];?></span></p><br>
-                    <span class="level"><strong> Instructor About: </strong><br><p><?php echo $row['level'];?></p></span>
-                    <br><a href="update.php">Update exsisting accreditation</a><br><a href="delete.php">Delete exsisting accreditation</a>
+                    <span class="level"><strong> Accredidation Level: </strong> <br><p><?php echo $row['level'];?></p></span>
+
+                    <div class=link>
+                    <a href="updateaccred.php?recId=<?php echo $row['accred_id'];?>" > Update exsisting Accredidation</a><br>
+                    </div>
+                    <div class=link>
+                    <a href="deleteaccreds.php?recId=<?php echo $row['accred_id'];?>">  Delete exsisting Accrediation</a>
+                    </div>
             </div>
             </div>
          <?php

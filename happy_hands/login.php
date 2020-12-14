@@ -151,7 +151,7 @@ if($_SESSION['validUser'] == "yes")
         <a class="nav-link" href="accreditations.php">Accreditations</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="schedule.php">Schedule</a>
+        <a class="nav-link" href="displaysched.php">Schedule</a>
       </li>
     </ul>
     <ul class="navbar-nav ml-auto nav-flex-icons">

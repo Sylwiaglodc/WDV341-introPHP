@@ -1,3 +1,33 @@
+<?php
+        require 'email.php';
+        If(isset($_POST['contactBtn'])){
+
+        $emailTest = new Emailer();
+
+        $emailTest->set_senderEmail("sylwiaglodc@gmail.com");
+        echo "Sender: " . $emailTest->get_senderEmail();
+        echo "<br>";
+
+        $emailTest->set_recipientEmail($_POST['email']);
+        echo "Recipient: " . $emailTest->get_recipientEmail();
+        echo "<br>";
+
+        $emailTest->set_subject("Happy Hands Contact Form!");
+        echo "Subject: " . $emailTest->get_subject();
+        echo "<br>";
+
+        $emailTest->set_message($_POST['message']);
+        echo $emailTest->get_message();
+        
+       // echo $emailTest->get_recipientEmail();
+
+        $result = $emailTest->sendEmail();  // send email to SMTP server
+        
+        //echo $result;
+        
+
+    }else { 
+?>
 <!DOCTYPE HTML> 
 <html lang="en">
 
@@ -44,7 +74,7 @@
             font-family:'Luckiest Guy', cursive;
             font-size: 30px;
         }
-        /* Style inputs, select elements and textareas */
+ 
 input[type=text], select, textarea{
   width: 100%;
   padding: 10px;
@@ -54,7 +84,7 @@ input[type=text], select, textarea{
   resize: vertical;
 }
 
-/* Style the label to display next to the inputs */
+
 label {
   padding: 5px 5px 5px 5px;
   display: inline-block;
@@ -71,7 +101,7 @@ input[type=submit] {
     font-family: 'Open Sans Condensed', sans-serif;
 }
 
-/* Style the container */
+
 .container2 {
   width:75%;
   border-radius: 5px;
@@ -81,7 +111,7 @@ input[type=submit] {
 }
        
 
-/* Floating column for labels: 25% width */
+
 .col-25 {
   float: left;
   width: 25%;
@@ -90,7 +120,7 @@ input[type=submit] {
     font-family: 'Open Sans Condensed', sans-serif;
 }
 
-/* Floating column for inputs: 75% width */
+
 .col-75 {
   float: left;
   width: 75%;
@@ -99,7 +129,7 @@ input[type=submit] {
     font-family: 'Open Sans Condensed', sans-serif;
 }
 
-/* Clear floats after the columns */
+
 .row:after {
   content: "";
   display: table;
@@ -107,7 +137,7 @@ input[type=submit] {
    
 }
 
-/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+
 @media screen and (max-width: 600px) {
   .col-25, .col-75, .form, input[type=submit] {
     width: 100%;
@@ -162,18 +192,18 @@ input[type=submit] {
   <div class="collapse navbar-collapse" id="navbarSupportedContent-555">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="about.html">About Us
+        <a class="nav-link" href="about.php">About Us
           <span class="sr-only">(current)</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="accred.html">Accreditation</a>
+        <a class="nav-link" href="accred.php">Accreditation</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="sched.html">Schedule</a>
+        <a class="nav-link" href="sched.php">Schedule</a>
       </li>
         <li class="nav-item">
-        <a class="nav-link" href="contact.html">Contact Us</a>
+        <a class="nav-link" href="contact.php">Contact Us</a>
       </li>
     </ul>
     <ul class="navbar-nav ml-auto nav-flex-icons">
@@ -196,69 +226,28 @@ input[type=submit] {
         <div class="container2">
        <h1 class="form"><P>CONTACT US:</P></h1>
         <div class="form">
-  <form method="post" name="myemailform" action="conform.php">
-    <div class="row">
-      <div class="col-25">
-        <label for="cfname"> Child's first Name</label>
-      </div>
-      <div class="col-75">
-        <input type="text" id="cfname" name="cfirstname" placeholder="Child's first name..">
-      </div>
+  
+    <div id="container">
+        <form name="contact" method="post" action="contact.php">
+
+        <label for="fname"> Full Name </label>
+        <input type="text" name="fname"><br>
+    
+        <label for="email"> Email </label>
+        <input type="text" name="email"><br>
+
+        <label for="message"> Message/ Inquiries </label>
+        <textarea name="message"></textarea><br>
+
+        <input type="submit" id="btn" name="contactBtn" value="Send"/> 
+
+    </form>
     </div>
-    <div class="row">
-      <div class="col-25">
-        <label for="clname">Child's last Name</label>
-      </div>
-      <div class="col-75">
-        <input type="text" id="clname" name="clastname" placeholder="Child's last name..">
-      </div>
-    </div>
-      <div class="row">
-      <div class="col-25">
-        <label for="pfname">Parent's first Name</label>
-      </div>
-      <div class="col-75">
-        <input type="text" id="pfname" name="pfirstname" placeholder="Parent's first Name..">
-      </div>
-    </div>
-      <div class="row">
-      <div class="col-25">
-        <label for="plname">Parent's last Name</label>
-      </div>
-      <div class="col-75">
-        <input type="text" id="plname" name="plastname" placeholder="Parent's last name..">
-      </div>
-    </div><br>
-    <div class="row">
-      <div class="col-25">
-        <label for="childsex">Child's gender<br></label>
-      </div>
-       <input type="radio" name="gender" value="male" checked><p> Male</p><br><br>
-  <input type="radio" name="gender" value="female"><p>Female </p> <br><br>
-  <input type="radio" name="gender" value="other"><p> Other</p>
-        </div>
-      <div class="drop">
-      <label for="childage">Child's age</label>
-    <select name="age">
-    <option value="0-1">0-1</option>
-    <option value="2-3">2-3</option>
-    <option value="4-5">4-5</option>
-    <option value="6-7">6-7</option>
-    <option value="8+">8+</option>
-          </select></div>
-  <br><br><br>
-    <div class="row">
-      <div class="col-25">
-        <label for="subject">A little info about yourselves!</label>
-      </div>
-      <div class="col-75">
-        <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
-      </div>
-    </div>
-    <div class="row">
-      <input type="submit" value="Submit">
-    </div>
-  </form>
+
+    <?php }
+echo $result;
+?>
+
 </div>                                             
  </div>                                              
    <div class="top">

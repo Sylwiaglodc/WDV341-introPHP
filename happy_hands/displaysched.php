@@ -1,7 +1,7 @@
 <?php
 try{
     require "dbConnect.php";
-    $sql= "SELECT schedule_time, schedule_name, schedule_desc FROM schedule ";
+    $sql= "SELECT schedule_id, schedule_time, schedule_name, schedule_desc FROM schedule ";
 
     $stmt = $conn->prepare($sql);
 
@@ -42,13 +42,11 @@ catch(PDOEXCEPTION $e)
     
     <style>
         a{
-            color: brown;
+            color: white;
         }
-        a:hover{
-            color: brown;
-        }
+
         footer{
-            background-color: saddlebrown;
+          background-color: #001933; 
         }
         .jumbotron{
             background-color: #f3ece7;
@@ -56,87 +54,19 @@ catch(PDOEXCEPTION $e)
         .card{
             background-color: #f3ece7;
         }
-        body{
-            background-color: #d0b4a0;
-        }  
+        body {
+		background-color: #98B4D4;
+    }
     .navbar{
-    background-color: #ad7c59;  
+    background-color: #001933;  
 }    
-        
-        .box {
-  width: 60%;
-  margin: 0 auto;
-  background: rgba(255,255,255,0.2);
-  padding: 35px;
-  border: 2px solid #fff;
-  border-radius: 20px/50px;
-  background-clip: padding-box;
-  text-align: center;
-}
 
-.button {
-    font-family: 'Open Sans Condensed', sans-serif;
-  font-size: 1em;
-  padding: 10px;
-  color: black;
-  border: 2px solid #ad7c59;
-  border-radius: 20px/50px;
-  text-decoration: none;
-  cursor: pointer;
-  transition: all 0.3s ease-out;
-}
-.button:hover {
-  background: #d0b4a0;
-}
-
-.overlay {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(0, 0, 0, 0.7);
-  transition: opacity 500ms;
-  visibility: hidden;
-  opacity: 0;
-}
-.overlay:target {
-  visibility: visible;
-  opacity: 1;
-}
-
-.popup {
-  margin: 70px auto;
-  padding: 20px;
-  background: #fff;
-  border-radius: 5px;
-  width: 80%;
-  position: relative;
-  transition: all 5s ease-in-out;
-}
-
-.popup h2 {
-  margin-top: 0;
-  color: #333;
-  font-family: Tahoma, Arial, sans-serif;
-}
-.popup .close {
-  position: absolute;
-  top: 20px;
-  right: 30px;
-  transition: all 200ms;
-  font-size: 30px;
-  font-weight: bold;
-  text-decoration: none;
-  color: #333;
-}
-.popup .close:hover {
-  color: #06D85F;
-}
-.popup .content {
-  max-height: 70%;
-  overflow: auto;
-}
+.link{
+  border-style:solid;
+  padding:10px;
+  margin:20px;
+}  
+      
 .accredmain{
   border-style:inset;
   padding: 10px;
@@ -181,11 +111,20 @@ catch(PDOEXCEPTION $e)
     .pre{
         font-size: 30px;
     }
+    .accredmain{
+      overflow-x:auto;
+    }
+    .accredmain{
+      overflow-x:auto;
+    }
 }
  
 @media all and (max-width: 599px) and (min-width: 320px) {
     .pre{
         font-size: 25px;
+    }
+    .accredmain{
+      overflow-x:auto;
     }
  
 }
@@ -243,12 +182,19 @@ catch(PDOEXCEPTION $e)
             while( $row=$stmt->fetch(PDO::FETCH_ASSOC)){
     ?> 
     
-  <div class="accredmain">
+  <div class="accredmain" style="overflow-x:auto;">
         <div class="grid">
                     <span class="accredorgan"><strong>Schedule Time:</strong> <p><?php echo $row['schedule_time'];?></p></span><br>
                     <span class="accredyear"><strong>Schedule Name: </strong> <p><?php echo $row['schedule_name'];?></span></p><br>
                     <span class="level"><strong> Schedule Description: </strong><br><p><?php echo $row['schedule_desc'];?></p></span>
-                    <br><a href="update.php">Update exsisting Instructor</a><br><a href="delete.php">Delete exsisting Instructor</a>
+
+
+                    <div class=link>
+                    <a href="updatesched.php?recId=<?php echo $row['schedule_id'];?>" > Update exsisting Schedule</a><br>
+                    </div>
+                    <div class=link>
+                    <a href="deletesched.php?recId=<?php echo $row['schedule_id'];?>">  Delete exsisting Schedule</a>
+                    </div>
             </div>
             </div>
          <?php
